@@ -1,0 +1,16 @@
+PODS:
+  - Rocket (0.1.0)
+
+DEPENDENCIES:
+  - Rocket (from `../`)
+
+EXTERNAL SOURCES:
+  Rocket:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Rocket: e61825d40442aad331904da88f1dd58c9c6021f8
+
+PODFILE CHECKSUM: fc6af874edd1e39ba684058186c159c7f049fb35
+
+COCOAPODS: 1.2.1
