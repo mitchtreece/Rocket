@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import Rocket
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        RKTLog("Hello, world!")
+        RKTLog(prefix: "🐞", message: "You found a bug!")
+                
     }
 
     override func didReceiveMemoryWarning() {

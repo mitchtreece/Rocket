@@ -18,5 +18,8 @@
   "platforms": {
     "ios": "8.0"
   },
+  "ios": {
+    "public_header_files": "Rocket/Classes/**/*.h"
+  },
   "source_files": "Rocket/Classes/**/*"
 }

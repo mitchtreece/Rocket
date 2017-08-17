@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "Rocket.h"
 
 FOUNDATION_EXPORT double RocketVersionNumber;
 FOUNDATION_EXPORT const unsigned char RocketVersionString[];
