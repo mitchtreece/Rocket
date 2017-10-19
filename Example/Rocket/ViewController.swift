@@ -16,13 +16,19 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         RKTLog("Hello, world!")
-        RKTLog(prefix: "🐞", message: "You found a bug!")
                 
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func didTapObjcButton(_ sender: UIButton) {
+        
+        let vc = ObjcViewController()
+        present(vc, animated: true, completion: nil)
+        
     }
 
 }

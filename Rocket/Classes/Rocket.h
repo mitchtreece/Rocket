@@ -6,6 +6,13 @@
 //  Copyright © 2017 Mitch Treece. All rights reserved.
 //
 
+#define kRocketLogLevelVerbose 5
+#define kRocketLogLevelDebug 4
+#define kRocketLogLevelError 3
+#define kRocketLogLevelWarning 2
+#define kRocketLogLevelInfo 1
+#define kRocketLogLevelNone 0
+
 #define RKTInfo(message) [Rocket log:message \
                               prefix:nil \
                                level:1 \
