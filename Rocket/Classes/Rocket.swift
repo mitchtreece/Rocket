@@ -44,7 +44,7 @@ import Foundation
     
     /// Specifies the **maximum** log level to print.
     /// Any logs _equal to_ or _less than_ this level will be printed.
-    public var maxLevel: LogLevel = .verbose
+    public var level: LogLevel = .verbose
     
     /// Specifies the level to lock the logger to.
     /// If this is greater than `none`, only logs **equal** to this level will be printed.
@@ -63,12 +63,25 @@ import Foundation
         
     }
     
-    public static func log(_ message: Any, prefix: String? = nil, level: LogLevel = .debug, file: String, function: String, line: Int) {
+    public convenience init(level: LogLevel = .debug) {
+        
+        self.init()
+        self.level = level
+        
+    }
+    
+    public static func log(_ rocket: Rocket = Rocket.shared,
+                           message: Any,
+                           prefix: String? = nil,
+                           level: LogLevel = .debug,
+                           file: String,
+                           function: String,
+                           line: Int) {
         
         guard level != .none else { return }
         guard let msg = message as? String else { return }
         
-        let timestamp = Rocket.shared.dateFormatter.string(from: Date())
+        let timestamp = rocket.dateFormatter.string(from: Date())
         let symbol = (prefix != nil) ? prefix! : self.symbol(for: level)
         let identifier = self.identifier(for: level)
         
@@ -83,9 +96,10 @@ import Foundation
             
         }
         
-        if Rocket.shared.lockedLevel > .none && level == Rocket.shared.lockedLevel {
+        if rocket.lockedLevel > .none && level == rocket.lockedLevel {
             
-            let string = logString(forSymbol: symbol,
+            let string = logString(rocket,
+                                   symbol: symbol,
                                    identifier: identifier,
                                    timestamp: timestamp,
                                    function: functionName,
@@ -97,9 +111,10 @@ import Foundation
         }
         else {
             
-            guard level <= Rocket.shared.maxLevel else { return }
+            guard level <= rocket.level else { return }
             
-            let string = logString(forSymbol: symbol,
+            let string = logString(rocket,
+                                   symbol: symbol,
                                    identifier: identifier,
                                    timestamp: timestamp,
                                    function: functionName,
@@ -112,9 +127,15 @@ import Foundation
         
     }
     
-    private static func logString(forSymbol symbol: String, identifier: String, timestamp: String, function: String, line: Int, message: String) -> String {
+    private static func logString(_ rocket: Rocket,
+                                  symbol: String,
+                                  identifier: String,
+                                  timestamp: String,
+                                  function: String,
+                                  line: Int,
+                                  message: String) -> String {
         
-        let components = Rocket.shared.components
+        let components = rocket.components
         
         var string = ""
         
@@ -184,25 +205,27 @@ import Foundation
 public struct RKTLog {
     
     @discardableResult
-    public init(_ message: String,
+    public init(_ rocket: Rocket = Rocket.shared,
+                message: String,
                     level: Rocket.LogLevel = .debug,
                      file: String = #file,
                  function: String = #function,
                      line: Int = #line) {
         
-        Rocket.log(message, prefix: nil, level: level, file: file, function: function, line: line)
+        Rocket.log(rocket, message: message, prefix: nil, level: level, file: file, function: function, line: line)
         
     }
     
     @discardableResult
-    public init(prefix: String,
+    public init(_ rocket: Rocket = Rocket.shared,
+                prefix: String,
                message: String,
                  level: Rocket.LogLevel = .debug,
                   file: String = #file,
               function: String = #function,
                   line: Int = #line) {
         
-        Rocket.log(message, prefix: prefix, level: level, file: file, function: function, line: line)
+        Rocket.log(rocket, message: message, prefix: prefix, level: level, file: file, function: function, line: line)
         
     }
     

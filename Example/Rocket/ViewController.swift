@@ -15,7 +15,11 @@ class ViewController: UIViewController {
         
         super.viewDidLoad()
         
-        RKTLog("Hello, world!")
+        let rkt = Rocket()
+        rkt.components = []
+        
+        RKTLog(message: "Hello, world!")
+        RKTLog(rkt, message: "Hello, world!")
                 
     }
 

@@ -20,7 +20,15 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     RKTLog(@"Hello, ObjC!");
-            
+    
+//    [Rocket log:[Rocket shared]
+//        message:@"ObjC"
+//         prefix:nil
+//          level:kRocketLogLevelDebug
+//           file:[NSString stringWithFormat:@"%s", __FILE__]
+//       function:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]
+//           line:__LINE__];
+    
 }
 
 - (void)didReceiveMemoryWarning {
