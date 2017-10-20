@@ -8,6 +8,36 @@
 
 import Foundation
 
+public struct RKTLog {
+    
+    @discardableResult
+    public init(_ message: String,
+                level: Rocket.LogLevel = .debug,
+                file: String = #file,
+                function: String = #function,
+                line: Int = #line,
+                rocket: Rocket = Rocket.shared) {
+        
+        Rocket.log(rocket: rocket, message: message, prefix: nil, level: level, file: file, function: function, line: line)
+        
+    }
+    
+    @discardableResult
+    public init(prefix: String,
+                message: String,
+                level: Rocket.LogLevel = .debug,
+                file: String = #file,
+                function: String = #function,
+                line: Int = #line,
+                rocket: Rocket = Rocket.shared) {
+        
+        Rocket.log(rocket: rocket, message: message, prefix: prefix, level: level, file: file, function: function, line: line)
+        
+    }
+    
+}
+
+@objcMembers
 @objc public class Rocket: NSObject {
     
     @objc public enum LogLevel: Int, Comparable {
@@ -57,6 +87,11 @@ import Foundation
     /// The date formatter to use when logging
     public var dateFormatter = DateFormatter()
     
+    /// The hooks to be called when logging
+    public var hooks = [RocketHook]()
+    
+    internal var entries = [LogEntry]()
+    
     private override init() {
         
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
@@ -70,111 +105,52 @@ import Foundation
         
     }
     
-    public static func log(_ rocket: Rocket = Rocket.shared,
-                           message: Any,
+    public static func log(rocket: Rocket = Rocket.shared,
+                           message: String,
                            prefix: String? = nil,
                            level: LogLevel = .debug,
                            file: String,
                            function: String,
                            line: Int) {
         
+        let entry = LogEntry(rocket: rocket,
+                             level: level,
+                             prefix: prefix,
+                             message: message,
+                             file: file,
+                             function: function,
+                             lineNumber: line,
+                             timestamp: Date())
+        
+        // Always execute hooks no matter what the entry's log level is.
+        // We should let the hook decide what to do with it.
+        
+        rocket.executeHooks(for: entry)
+        
         guard level != .none else { return }
-        guard let msg = message as? String else { return }
         
-        let timestamp = rocket.dateFormatter.string(from: Date())
-        let symbol = (prefix != nil) ? prefix! : self.symbol(for: level)
-        let identifier = self.identifier(for: level)
-        
-        var functionName = function.replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: "")
-        
-        if !functionName.contains(" ") {
+        if level == rocket.lockedLevel || level <= rocket.level {
             
-            // Probably a Swift function. Append filename.
-            
-            let fileName = (file as NSString).lastPathComponent.replacingOccurrences(of: ".swift", with: "")
-            functionName = "\(fileName).\(functionName)"
-            
-        }
-        
-        if rocket.lockedLevel > .none && level == rocket.lockedLevel {
-            
-            let string = logString(rocket,
-                                   symbol: symbol,
-                                   identifier: identifier,
-                                   timestamp: timestamp,
-                                   function: functionName,
-                                   line: line,
-                                   message: msg)
-            
-            print(string)
-            
-        }
-        else {
-            
-            guard level <= rocket.level else { return }
-            
-            let string = logString(rocket,
-                                   symbol: symbol,
-                                   identifier: identifier,
-                                   timestamp: timestamp,
-                                   function: functionName,
-                                   line: line,
-                                   message: msg)
-            
-            print(string)
+            rocket.entries.append(entry)
+            print(entry.logString ?? rocketLog(withContext: nil, message: "Unable to generate log string"))
             
         }
         
     }
     
-    private static func logString(_ rocket: Rocket,
-                                  symbol: String,
-                                  identifier: String,
-                                  timestamp: String,
-                                  function: String,
-                                  line: Int,
-                                  message: String) -> String {
+    // MARK: Hooks
+    
+    private func executeHooks(for entry: LogEntry) {
         
-        let components = rocket.components
-        
-        var string = ""
-        
-        if components.contains(.prefix) {
-            string += "(\(symbol))"
+        for hook in hooks {
+            hook.didAddEntry(entry)
         }
-        
-        if components.contains(.level) {
-            string += " [\(identifier)]"
-        }
-        
-        if components.contains(.timestamp) {
-            string += " \(timestamp)"
-        }
-        
-        if components.contains(.function) {
-            string += " \(function)"
-        }
-        
-        if components.contains(.lineNumber) {
-            string += " (\(line))"
-        }
-        
-        string += (string.count > 0) ? ": \(message)" : message
-        
-        // Remove beginning characters if needed
-        
-        let index = string.index(string.startIndex, offsetBy: 1)
-        let substring = string.substring(to: index)
-        
-        if substring == " " {
-            string.remove(at: string.startIndex)
-        }
-        
-        return string
         
     }
     
-    private static func symbol(for level: LogLevel) -> String {
+    // MARK: Helpers
+    
+    internal static func prefix(for level: LogLevel) -> String {
         
         switch level {
         case .verbose: return "💬"
@@ -187,7 +163,7 @@ import Foundation
         
     }
     
-    private static func identifier(for level: LogLevel) -> String {
+    internal static func identifier(for level: LogLevel) -> String {
         
         switch level {
         case .verbose: return "Verbose"
@@ -200,32 +176,15 @@ import Foundation
         
     }
     
-}
-
-public struct RKTLog {
-    
-    @discardableResult
-    public init(_ rocket: Rocket = Rocket.shared,
-                message: String,
-                    level: Rocket.LogLevel = .debug,
-                     file: String = #file,
-                 function: String = #function,
-                     line: Int = #line) {
+    internal static func rocketLog(withContext context: String?, message: String) {
         
-        Rocket.log(rocket, message: message, prefix: nil, level: level, file: file, function: function, line: line)
+        var _context = "[Rocket"
+        if let ctx = context {
+            _context += " (\(ctx))"
+        }
+        _context += "]"
         
-    }
-    
-    @discardableResult
-    public init(_ rocket: Rocket = Rocket.shared,
-                prefix: String,
-               message: String,
-                 level: Rocket.LogLevel = .debug,
-                  file: String = #file,
-              function: String = #function,
-                  line: Int = #line) {
-        
-        Rocket.log(rocket, message: message, prefix: prefix, level: level, file: file, function: function, line: line)
+        print("(🚀) \(_context): \(message)")
         
     }
     

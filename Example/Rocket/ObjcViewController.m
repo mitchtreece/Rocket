@@ -19,15 +19,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    RKTLog(@"Hello, ObjC!");
-    
-//    [Rocket log:[Rocket shared]
-//        message:@"ObjC"
-//         prefix:nil
-//          level:kRocketLogLevelDebug
-//           file:[NSString stringWithFormat:@"%s", __FILE__]
-//       function:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]
-//           line:__LINE__];
+//    RKTLog(@"Hello, ObjC!");
+//    [Rocket logWithRocket:[Rocket shared] message:@"Hello" prefix:nil level:kRocketLogLevelDebug file:@"" function:@"" line:0];
     
 }
 
