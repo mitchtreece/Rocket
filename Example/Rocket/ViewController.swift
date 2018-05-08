@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  Rocket
 //
-//  Created by mitchtreece on 08/07/2017.
-//  Copyright (c) 2017 mitchtreece. All rights reserved.
+//  Created by Mitch Treece on 08/07/2017.
+//  Copyright (c) 2017 Mitch Treece. All rights reserved.
 //
 
 import UIKit
@@ -15,20 +15,22 @@ class ViewController: UIViewController {
         
         super.viewDidLoad()
         
-        RKTLog("This is some information", level: .info)
-        RKTLog("This is a warning", level: .warning)
-        RKTLog("A wild error appeared!", level: .error)
-        RKTLog("This is a debug message", level: .debug)
-        RKTLog("This is long verbose text. Woohoo! #yolo bitches! Cowabunga fugger!)", level: .verbose)
-        
-        let rocket = Rocket()
-        let cloud = CloudHook(url: URL(string: "http://path/to/endpoint")!, auth: nil)
-        rocket.hooks = [cloud]
-        
-        RKTLog("Testing hooks", rocket: rocket)
-        
         let pressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(_:)))
         view.addGestureRecognizer(pressRecognizer)
+        
+        let cloud = CloudHook(url: URL(string: "http://path/to/endpoint")!, auth: nil)
+        cloud.condition({ $0.level == Rocket.LogLevel.error })
+        
+        let alert = ConditionalHook(condition: { $0.level == Rocket.LogLevel.error }, handler: { (entry) in
+            
+            let alert = UIAlertController(title: "Error", message: entry.message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+        })
+        
+        Rocket.shared.hooks = [cloud, alert]
+        RKTLog("Hello, world!")
                 
     }
     
@@ -44,6 +46,21 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func didTapButton(_ sender: UIButton) {
+        
+        let level = Rocket.LogLevel(rawValue: sender.tag) ?? .none
+        
+        switch level {
+        case .none: break
+        case .info: RKTLog("This is some information", level: .info)
+        case .warning: RKTLog("This is a warning", level: .warning)
+        case .error: RKTLog("A wild error appeared!", level: .error)
+        case .debug: RKTLog("This is a debug message", level: .debug)
+        case .verbose: RKTLog("This is an extremely long verbose message. Woohoo!", level: .verbose)
+        }
+        
+    }
+    
     @IBAction func didTapObjcButton(_ sender: UIButton) {
         
         let vc = ObjcViewController()
@@ -52,4 +69,3 @@ class ViewController: UIViewController {
     }
 
 }
-

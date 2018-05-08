@@ -8,7 +8,7 @@
 import Foundation
 
 public class DiskHook: RocketHook {
-    
+        
     private var dateFormatter: DateFormatter!
     
     private var filePath: String? {
@@ -34,7 +34,7 @@ public class DiskHook: RocketHook {
     public func didAddEntry(_ entry: LogEntry) {
         
         guard let path = filePath else {
-            Rocket.rocketLog(withContext: "DiskHook", message: "Error generating log path")
+            Rocket.internalLog(withContext: "DiskHook", message: "Error generating log path", prefix: "💾")
             return
         }
         
@@ -48,7 +48,7 @@ public class DiskHook: RocketHook {
             try "\(contents)\(entry.logString ?? "")\n".write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
         }
         catch let error {
-            Rocket.rocketLog(withContext: "DiskHook", message: error.localizedDescription)
+            Rocket.internalLog(withContext: "DiskHook", message: error.localizedDescription, prefix: "💾")
         }
         
     }

@@ -1,9 +1,9 @@
 //
 //  ObjcViewController.m
-//  Rocket_Example
+//  Rocket
 //
 //  Created by Mitch Treece on 8/16/17.
-//  Copyright © 2017 CocoaPods. All rights reserved.
+//  Copyright © 2017 Mitch Treece. All rights reserved.
 //
 
 #import "ObjcViewController.h"
@@ -19,15 +19,9 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-//    RKTLog(@"Hello, ObjC!");
-//    [Rocket logWithRocket:[Rocket shared] message:@"Hello" prefix:nil level:kRocketLogLevelDebug file:@"" function:@"" line:0];
+    // RKTLog(@"Hello, ObjC!");
+    // [Rocket logWithRocket:[Rocket shared] message:@"Hello" prefix:nil level:kRocketLogLevelDebug file:@"" function:@"" line:0];
     
-}
-
-- (void)didReceiveMemoryWarning {
-    
-    [super didReceiveMemoryWarning];
-
 }
 
 @end

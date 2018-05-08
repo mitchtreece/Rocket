@@ -14,7 +14,7 @@ public class RocketConsoleViewController: UIViewController {
     
     private(set) var rocket: Rocket
     
-    public static func instance(for rocket: Rocket = Rocket.shared) -> UIViewController {
+    public static func instance(with rocket: Rocket = Rocket.shared) -> UIViewController {
         
         let vc = RocketConsoleViewController(rocket: rocket)
         let nav = UINavigationController(rootViewController: vc)

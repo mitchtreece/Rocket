@@ -8,33 +8,8 @@
 
 import Foundation
 
-public struct RKTLog {
-    
-    @discardableResult
-    public init(_ message: String,
-                level: Rocket.LogLevel = .debug,
-                file: String = #file,
-                function: String = #function,
-                line: Int = #line,
-                rocket: Rocket = Rocket.shared) {
-        
-        Rocket.log(rocket: rocket, message: message, prefix: nil, level: level, file: file, function: function, line: line)
-        
-    }
-    
-    @discardableResult
-    public init(prefix: String,
-                message: String,
-                level: Rocket.LogLevel = .debug,
-                file: String = #file,
-                function: String = #function,
-                line: Int = #line,
-                rocket: Rocket = Rocket.shared) {
-        
-        Rocket.log(rocket: rocket, message: message, prefix: prefix, level: level, file: file, function: function, line: line)
-        
-    }
-    
+public protocol RocketObserver: class {
+    func rocket(_ rocket: Rocket, didLogEntry entry: LogEntry)
 }
 
 @objcMembers
@@ -78,24 +53,22 @@ public struct RKTLog {
     
     /// Specifies the level to lock the logger to.
     /// If this is greater than `none`, only logs **equal** to this level will be printed.
-    /// - note: If this is greater than `none`, the `maxLevel` property will be ignored.
+    /// - Note: If this is greater than `none`, the `level` property will be ignored.
     public var lockedLevel: LogLevel = .none
     
     /// Specifies the components to be included when logging
-    public var components: [Components] = [.prefix, .level, .timestamp, .function, .lineNumber]
+    public var components: [Components] = [.prefix, .level, .function, .lineNumber]
     
     /// The date formatter to use when logging
-    public var dateFormatter = DateFormatter()
+    public var timestampFormatter = DateFormatter()
     
     /// The hooks to be called when logging
     public var hooks = [RocketHook]()
-    
+        
     internal var entries = [LogEntry]()
     
     private override init() {
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
-        
+        timestampFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
     }
     
     public convenience init(level: LogLevel = .debug) {
@@ -122,19 +95,24 @@ public struct RKTLog {
                              lineNumber: line,
                              timestamp: Date())
         
-        // Always execute hooks no matter what the entry's log level is.
-        // We should let the hook decide what to do with it.
-        
-        rocket.executeHooks(for: entry)
-        
-        guard level != .none else { return }
+        if level == .none {
+            
+            // Always execute hooks (regardless of what the entry's level is)
+            // We should let the hook decide what to do with it
+            
+            rocket.executeHooks(for: entry)
+            return
+            
+        }
         
         if level == rocket.lockedLevel || level <= rocket.level {
             
             rocket.entries.append(entry)
-            print(entry.logString ?? rocketLog(withContext: nil, message: "Unable to generate log string"))
+            print(entry.logString ?? internalLog(withContext: nil, message: "Unable to generate log string"))
             
         }
+        
+        rocket.executeHooks(for: entry)
         
     }
     
@@ -142,8 +120,15 @@ public struct RKTLog {
     
     private func executeHooks(for entry: LogEntry) {
         
-        for hook in hooks {
+        hooks.forEach { (hook) in
+            
+            func check(_ conditions: [RocketHook.Condition]) -> Bool {
+                return (conditions.first(where: { !$0(entry) }) == nil)
+            }
+            
+            guard check(hook.conditions) else { return }
             hook.didAddEntry(entry)
+            
         }
         
     }
@@ -157,7 +142,7 @@ public struct RKTLog {
         case .debug: return "⚙️"
         case .error: return "🚫"
         case .warning: return "⚠️"
-        case .info: return "❕"
+        case .info: return "ℹ️"
         default: return ""
         }
         
@@ -176,15 +161,18 @@ public struct RKTLog {
         
     }
     
-    internal static func rocketLog(withContext context: String?, message: String) {
+    public static func internalLog(withContext context: String?, message: String, prefix: String? = nil) {
         
+        let pre = prefix ?? "🚀"
         var _context = "[Rocket"
+        
         if let ctx = context {
-            _context += " (\(ctx))"
+            _context += "(\(ctx))"
         }
+        
         _context += "]"
         
-        print("(🚀) \(_context): \(message)")
+        print("(\(pre)) \(_context): \(message)")
         
     }
     

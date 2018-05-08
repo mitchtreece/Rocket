@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,17 +28,87 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="6k9-r2-hhw"/>
                                 </constraints>
-                                <state key="normal" title="ObjC"/>
+                                <state key="normal" title="Objective-C"/>
                                 <connections>
-                                    <action selector="didTapObjcButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="LKh-7m-3Gl"/>
+                                    <action selector="didTapObjcButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="VuY-zr-VtL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="reE-pv-gfu">
+                                <rect key="frame" x="16" y="539" width="168" height="50"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="UYq-P9-ihQ"/>
+                                </constraints>
+                                <state key="normal" title="Info"/>
+                                <connections>
+                                    <action selector="didTapButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0ym-vX-dzP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDo-mX-Zah">
+                                <rect key="frame" x="191" y="539" width="168" height="50"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="8ux-6a-7ak"/>
+                                </constraints>
+                                <state key="normal" title="Warning"/>
+                                <connections>
+                                    <action selector="didTapButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kyX-fF-lVE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pjv-30-tz6">
+                                <rect key="frame" x="16" y="481" width="168" height="50"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="bUa-zx-nfI"/>
+                                </constraints>
+                                <state key="normal" title="Error"/>
+                                <connections>
+                                    <action selector="didTapButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="R4m-Mi-g24"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cWl-fU-hsO">
+                                <rect key="frame" x="191" y="481" width="168" height="50"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Nxp-dy-Jxz"/>
+                                </constraints>
+                                <state key="normal" title="Debug"/>
+                                <connections>
+                                    <action selector="didTapButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="IjN-RX-kFd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V3g-gx-nog">
+                                <rect key="frame" x="16" y="423" width="343" height="50"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="wuE-7u-436"/>
+                                </constraints>
+                                <state key="normal" title="Verbose"/>
+                                <connections>
+                                    <action selector="didTapButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Naz-P3-abj"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="V3g-gx-nog" secondAttribute="trailing" constant="16" id="6Mw-VV-2gv"/>
+                            <constraint firstItem="Pjv-30-tz6" firstAttribute="width" secondItem="reE-pv-gfu" secondAttribute="width" id="6lo-wr-ZdD"/>
+                            <constraint firstItem="Pjv-30-tz6" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="16" id="9Q2-IK-CBF"/>
+                            <constraint firstAttribute="trailing" secondItem="gDo-mX-Zah" secondAttribute="trailing" constant="16" id="CN9-nF-BvT"/>
+                            <constraint firstItem="Pjv-30-tz6" firstAttribute="top" secondItem="V3g-gx-nog" secondAttribute="bottom" constant="8" id="Ev4-Gd-SMK"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="FcO-6e-gEP" secondAttribute="bottom" constant="20" id="Gad-rV-TAQ"/>
                             <constraint firstAttribute="trailing" secondItem="FcO-6e-gEP" secondAttribute="trailing" constant="16" id="Hjk-LM-fUp"/>
+                            <constraint firstItem="FcO-6e-gEP" firstAttribute="top" secondItem="gDo-mX-Zah" secondAttribute="bottom" constant="8" id="OGP-76-DWj"/>
+                            <constraint firstItem="gDo-mX-Zah" firstAttribute="top" secondItem="cWl-fU-hsO" secondAttribute="bottom" constant="8" id="Rib-Hg-Nmy"/>
+                            <constraint firstItem="reE-pv-gfu" firstAttribute="top" secondItem="Pjv-30-tz6" secondAttribute="bottom" constant="8" id="XDy-DE-jfr"/>
+                            <constraint firstItem="gDo-mX-Zah" firstAttribute="width" secondItem="FcO-6e-gEP" secondAttribute="width" multiplier="0.49" id="dr7-jE-t5U"/>
+                            <constraint firstItem="reE-pv-gfu" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="16" id="hIT-3M-cHh"/>
+                            <constraint firstAttribute="trailing" secondItem="cWl-fU-hsO" secondAttribute="trailing" constant="16" id="jNh-1n-3SJ"/>
                             <constraint firstItem="FcO-6e-gEP" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="16" id="lfS-0h-D6C"/>
+                            <constraint firstItem="cWl-fU-hsO" firstAttribute="width" secondItem="gDo-mX-Zah" secondAttribute="width" id="pRy-kC-Tn5"/>
+                            <constraint firstItem="reE-pv-gfu" firstAttribute="width" secondItem="FcO-6e-gEP" secondAttribute="width" multiplier="0.49" id="uys-Jy-fzE"/>
+                            <constraint firstItem="V3g-gx-nog" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="16" id="vxO-8J-f1d"/>
+                            <constraint firstItem="FcO-6e-gEP" firstAttribute="top" secondItem="reE-pv-gfu" secondAttribute="bottom" constant="8" id="x7O-pP-gMt"/>
                         </constraints>
                     </view>
                 </viewController>

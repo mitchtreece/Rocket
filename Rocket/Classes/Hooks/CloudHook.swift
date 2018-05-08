@@ -13,7 +13,6 @@ public class CloudHook: RocketHook {
     
     var url: URL
     var auth: Auth?
-    var additionalParameters: [String: Any]?
     
     public init(url: URL, auth: Auth? = nil) {
         
@@ -23,10 +22,7 @@ public class CloudHook: RocketHook {
     }
     
     public func didAddEntry(_ entry: LogEntry) {
-        
-        let serializedEntry = serialization(for: entry)
-        Rocket.rocketLog(withContext: "CloudHook", message: "\(serializedEntry) --> \(url.absoluteString)")
-        
+        Rocket.internalLog(withContext: "CloudHook", message: "Sending \(entry)", prefix: "☁️")
     }
     
     private func serialization(for entry: LogEntry) -> [String: Any] {
@@ -37,7 +33,7 @@ public class CloudHook: RocketHook {
             "file": (entry.file as NSString).lastPathComponent,
             "function": entry.function,
             "line_number": entry.lineNumber,
-            "timestamp": entry.rocket?.dateFormatter.string(from: entry.timestamp) ?? "???"
+            "timestamp": entry.rocket?.timestampFormatter.string(from: entry.timestamp) ?? "???"
         ]
         
         if let prefix = entry.prefix {

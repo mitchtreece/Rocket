@@ -7,8 +7,33 @@
 
 import Foundation
 
-public protocol RocketHook {
-    
+private struct AssociatedKeys {
+    static var ConditionsKey = "RocketHook.conditions"
+}
+
+public protocol RocketHook: class {
     func didAddEntry(_ entry: LogEntry)
+}
+
+extension RocketHook {
+    
+    public typealias Condition = (LogEntry)->(Bool)
+    
+    internal var conditions: [Condition] {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKeys.ConditionsKey) as? [Condition] ?? []
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.ConditionsKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    public func condition(_ block: @escaping Condition) {
+        
+        var _conditions = self.conditions
+        _conditions.append(block)
+        self.conditions = _conditions
+        
+    }
     
 }

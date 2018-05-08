@@ -19,6 +19,8 @@
 		206037AEF4F155943E24B2E1DEC87847 /* LogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D45A00F55CB7570B95C08C20BF51D6 /* LogEntry.swift */; };
 		219B0D7D1947FB36B08B77CA96B71C96 /* ConstraintMakerEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CE3DCD5A18E652A9D4C4FCC6AEAE10 /* ConstraintMakerEditable.swift */; };
 		25BDAD079C77CC062B337BA189913345 /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA17F2D7F42352672F30A144E51AC809 /* ConstraintRelation.swift */; };
+		2634053520A24843001CB446 /* RKTLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2634053320A24699001CB446 /* RKTLog.swift */; };
+		2634053920A25A6C001CB446 /* ConditionalHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2634053820A25A6C001CB446 /* ConditionalHook.swift */; };
 		26ECA6201F9AA91D00DE9666 /* RocketHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ECA61F1F9AA91D00DE9666 /* RocketHook.swift */; };
 		26ECA6221F9AAA9E00DE9666 /* DiskHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ECA6211F9AAA9E00DE9666 /* DiskHook.swift */; };
 		26ECA6241F9ABEAD00DE9666 /* CloudHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26ECA6231F9ABEAD00DE9666 /* CloudHook.swift */; };
@@ -101,6 +103,8 @@
 		18C8C3851ACE42DA0B07B1E74FFF23EA /* Pods-Rocket_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Rocket_Tests-dummy.m"; sourceTree = "<group>"; };
 		1C3A931CDC4FB0563592274ED61655C7 /* ConstraintPriority.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintPriority.swift; path = Source/ConstraintPriority.swift; sourceTree = "<group>"; };
 		23C4EE941C99C2F663494C43944D63FD /* ConstraintConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConfig.swift; path = Source/ConstraintConfig.swift; sourceTree = "<group>"; };
+		2634053320A24699001CB446 /* RKTLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RKTLog.swift; sourceTree = "<group>"; };
+		2634053820A25A6C001CB446 /* ConditionalHook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalHook.swift; sourceTree = "<group>"; };
 		26ECA61F1F9AA91D00DE9666 /* RocketHook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketHook.swift; sourceTree = "<group>"; };
 		26ECA6211F9AAA9E00DE9666 /* DiskHook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskHook.swift; sourceTree = "<group>"; };
 		26ECA6231F9ABEAD00DE9666 /* CloudHook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudHook.swift; sourceTree = "<group>"; };
@@ -214,6 +218,7 @@
 			children = (
 				0457AE821C8FC9785813303A0C7272E2 /* Rocket.h */,
 				701CDC6E16613A37D2F275A3BF41BD67 /* Rocket.swift */,
+				2634053320A24699001CB446 /* RKTLog.swift */,
 				B5D45A00F55CB7570B95C08C20BF51D6 /* LogEntry.swift */,
 				26ECA61E1F9AA90500DE9666 /* Hooks */,
 				1C1AA0372AD7D0CA004DA0868EE5ACA5 /* Console */,
@@ -259,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				26ECA61F1F9AA91D00DE9666 /* RocketHook.swift */,
+				2634053820A25A6C001CB446 /* ConditionalHook.swift */,
 				26ECA6211F9AAA9E00DE9666 /* DiskHook.swift */,
 				26ECA6231F9ABEAD00DE9666 /* CloudHook.swift */,
 			);
@@ -546,7 +552,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0930;
+				TargetAttributes = {
+					27021872C726A3C98C6BD7FD832301DD = {
+						LastSwiftMigration = 0930;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -594,9 +605,11 @@
 				26ECA6241F9ABEAD00DE9666 /* CloudHook.swift in Sources */,
 				CCF381A094CBD3821A68DB7219B44DD5 /* ConsoleEntryCell.swift in Sources */,
 				206037AEF4F155943E24B2E1DEC87847 /* LogEntry.swift in Sources */,
+				2634053520A24843001CB446 /* RKTLog.swift in Sources */,
 				0C8AF5E7B1931B8ECA7A1CC6B04ACF51 /* Rocket-dummy.m in Sources */,
 				1F85B70D8D734C09D7FF7D4724CD77E0 /* Rocket.swift in Sources */,
 				AE3F7240487236188484BA4CC3127DB0 /* RocketConsoleViewController.swift in Sources */,
+				2634053920A25A6C001CB446 /* ConditionalHook.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,6 +683,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C81838AC1D2BAA1684E9EE2F84CB841B /* Pods-Rocket_Tests.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -706,6 +720,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9706B6D570872C8482D352CD76CB3805 /* Pods-Rocket_Example.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -750,23 +766,33 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_DEBUG=1",
@@ -792,6 +818,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 48A85101C7CB000DBEE8F641490B02C6 /* SnapKit.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -826,6 +853,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8654FE39A6E5860D3F764E0BF203BB14 /* Rocket.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -860,6 +888,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8654FE39A6E5860D3F764E0BF203BB14 /* Rocket.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -901,22 +930,32 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_RELEASE=1",
 					"$(inherited)",
@@ -930,6 +969,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SYMROOT = "${SRCROOT}/../build";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -939,6 +979,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 48A85101C7CB000DBEE8F641490B02C6 /* SnapKit.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -974,6 +1015,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B81296054E676302E7606D0B3804A9C8 /* Pods-Rocket_Tests.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1010,6 +1052,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8C96BE7A3066F89083E42C822DA53D83 /* Pods-Rocket_Example.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";

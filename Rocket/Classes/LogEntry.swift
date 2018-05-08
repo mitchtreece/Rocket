@@ -11,19 +11,19 @@ public struct LogEntry {
     
     internal weak var rocket: Rocket?
     
-    var level: Rocket.LogLevel
-    var prefix: String?
-    var message: String
-    var file: String
-    var function: String
-    var lineNumber: Int
-    var timestamp: Date
+    public internal(set) var level: Rocket.LogLevel
+    public internal(set) var prefix: String?
+    public internal(set) var message: String
+    public internal(set) var file: String
+    public internal(set) var function: String
+    public internal(set) var lineNumber: Int
+    public internal(set) var timestamp: Date
     
-    var logString: String? {
+    internal var logString: String? {
         
-        guard let rkt = rocket else { return nil }
+        guard let rocket = rocket else { return nil }
         
-        let ts = rkt.dateFormatter.string(from: timestamp)
+        let ts = rocket.timestampFormatter.string(from: timestamp)
         let pre = (prefix != nil) ? prefix! : Rocket.prefix(for: level)
         let id = Rocket.identifier(for: level)
         
@@ -38,7 +38,7 @@ public struct LogEntry {
             
         }
         
-        let components = rkt.components
+        let components = rocket.components
         
         var string = ""
         
@@ -77,7 +77,7 @@ public struct LogEntry {
         
     }
     
-    var consoleString: String? {
+    internal var consoleString: String? {
         
         guard let _ = rocket else { return nil }
         
