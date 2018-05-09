@@ -19,8 +19,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    // RKTLog(@"Hello, ObjC!");
-    // [Rocket logWithRocket:[Rocket shared] message:@"Hello" prefix:nil level:kRocketLogLevelDebug file:@"" function:@"" line:0];
+    RKTLog(@"Hello, Objective-C!");
     
 }
 

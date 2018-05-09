@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Rocket
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,8 +15,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        let alert = ConditionalHook({ $0.level == Rocket.LogLevel.error }, handler: { [weak self] (entry) in
+            
+            let message = """
+            \(entry.formattedFunctionName)()
+            \(entry.message)
+            """
+            
+            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+            
+            let vc = self?.window?.rootViewController
+            vc?.present(alert, animated: true, completion: nil)
+            
+        })
+        
+        Rocket.shared.hooks = [alert]
+        
         return true
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

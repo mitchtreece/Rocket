@@ -16,7 +16,7 @@
 		1EA5DB1790BB7CC400A4E81508D247B5 /* ConstraintInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297EFDA2A228BE0D126B13FEC2B2AC1 /* ConstraintInsets.swift */; };
 		1F85B70D8D734C09D7FF7D4724CD77E0 /* Rocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701CDC6E16613A37D2F275A3BF41BD67 /* Rocket.swift */; };
 		2052D8D0EA32C466D98D2805491A399A /* SnapKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6A0FF4538E79F99D128BB1E6852833 /* SnapKit-dummy.m */; };
-		206037AEF4F155943E24B2E1DEC87847 /* LogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D45A00F55CB7570B95C08C20BF51D6 /* LogEntry.swift */; };
+		206037AEF4F155943E24B2E1DEC87847 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D45A00F55CB7570B95C08C20BF51D6 /* Entry.swift */; };
 		219B0D7D1947FB36B08B77CA96B71C96 /* ConstraintMakerEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CE3DCD5A18E652A9D4C4FCC6AEAE10 /* ConstraintMakerEditable.swift */; };
 		25BDAD079C77CC062B337BA189913345 /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA17F2D7F42352672F30A144E51AC809 /* ConstraintRelation.swift */; };
 		2634053520A24843001CB446 /* RKTLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2634053320A24699001CB446 /* RKTLog.swift */; };
@@ -150,7 +150,7 @@
 		AF5FAAF2F13CE5B667DCA58EF782CF6D /* ConstraintLayoutGuide.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuide.swift; path = Source/ConstraintLayoutGuide.swift; sourceTree = "<group>"; };
 		B058F739089B32F3323418933731ADFB /* ConstraintViewDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintViewDSL.swift; path = Source/ConstraintViewDSL.swift; sourceTree = "<group>"; };
 		B54347160C1E2D6152E0A49C97D43D4B /* Pods-Rocket_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Rocket_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		B5D45A00F55CB7570B95C08C20BF51D6 /* LogEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LogEntry.swift; sourceTree = "<group>"; };
+		B5D45A00F55CB7570B95C08C20BF51D6 /* Entry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		B81296054E676302E7606D0B3804A9C8 /* Pods-Rocket_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Rocket_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		B8BDCD0CDEC036E08EBEFEBDB5217C5A /* ConstraintView+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintView+Extensions.swift"; path = "Source/ConstraintView+Extensions.swift"; sourceTree = "<group>"; };
 		B98FAA51B4A88FE4311D74100038356E /* ConsoleEntryCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ConsoleEntryCell.swift; sourceTree = "<group>"; };
@@ -218,8 +218,8 @@
 			children = (
 				0457AE821C8FC9785813303A0C7272E2 /* Rocket.h */,
 				701CDC6E16613A37D2F275A3BF41BD67 /* Rocket.swift */,
+				B5D45A00F55CB7570B95C08C20BF51D6 /* Entry.swift */,
 				2634053320A24699001CB446 /* RKTLog.swift */,
-				B5D45A00F55CB7570B95C08C20BF51D6 /* LogEntry.swift */,
 				26ECA61E1F9AA90500DE9666 /* Hooks */,
 				1C1AA0372AD7D0CA004DA0868EE5ACA5 /* Console */,
 			);
@@ -604,7 +604,7 @@
 				26ECA6221F9AAA9E00DE9666 /* DiskHook.swift in Sources */,
 				26ECA6241F9ABEAD00DE9666 /* CloudHook.swift in Sources */,
 				CCF381A094CBD3821A68DB7219B44DD5 /* ConsoleEntryCell.swift in Sources */,
-				206037AEF4F155943E24B2E1DEC87847 /* LogEntry.swift in Sources */,
+				206037AEF4F155943E24B2E1DEC87847 /* Entry.swift in Sources */,
 				2634053520A24843001CB446 /* RKTLog.swift in Sources */,
 				0C8AF5E7B1931B8ECA7A1CC6B04ACF51 /* Rocket-dummy.m in Sources */,
 				1F85B70D8D734C09D7FF7D4724CD77E0 /* Rocket.swift in Sources */,

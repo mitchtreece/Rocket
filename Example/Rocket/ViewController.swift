@@ -15,23 +15,11 @@ class ViewController: UIViewController {
         
         super.viewDidLoad()
         
+        RKTLog("Hello, world!")
+        
         let pressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(_:)))
         view.addGestureRecognizer(pressRecognizer)
         
-        let cloud = CloudHook(url: URL(string: "http://path/to/endpoint")!, auth: nil)
-        cloud.condition({ $0.level == Rocket.LogLevel.error })
-        
-        let alert = ConditionalHook(condition: { $0.level == Rocket.LogLevel.error }, handler: { (entry) in
-            
-            let alert = UIAlertController(title: "Error", message: entry.message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            
-        })
-        
-        Rocket.shared.hooks = [cloud, alert]
-        RKTLog("Hello, world!")
-                
     }
     
     @objc private func didLongPress(_ recognizer: UILongPressGestureRecognizer) {
@@ -39,11 +27,6 @@ class ViewController: UIViewController {
         let vc = RocketConsoleViewController.instance()
         present(vc, animated: true, completion: nil)
         
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func didTapButton(_ sender: UIButton) {

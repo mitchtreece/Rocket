@@ -14,14 +14,14 @@ class ConsoleEntryCell: UITableViewCell {
     
     private var label: UILabel!
     
-    var entry: LogEntry? {
+    var entry: Entry? {
         didSet {
             guard let entry = entry else { return }
             layout(for: entry)
         }
     }
     
-    static func height(for entry: LogEntry) -> CGFloat {
+    static func height(for entry: Entry) -> CGFloat {
         
         guard let string = entry.consoleString else { return 0 }
         
@@ -67,7 +67,7 @@ class ConsoleEntryCell: UITableViewCell {
         
     }
     
-    private func layout(for entry: LogEntry) {
+    private func layout(for entry: Entry) {
         
         label.text = entry.consoleString
         

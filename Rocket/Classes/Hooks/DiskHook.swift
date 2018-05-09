@@ -31,10 +31,10 @@ public class DiskHook: RocketHook {
         
     }
     
-    public func didAddEntry(_ entry: LogEntry) {
+    public func hook(_ entry: Entry) {
         
         guard let path = filePath else {
-            Rocket.internalLog(withContext: "DiskHook", message: "Error generating log path", prefix: "💾")
+            Rocket._log(source: "DiskHook", message: "Error generating log path", prefix: "💾")
             return
         }
         
@@ -48,7 +48,7 @@ public class DiskHook: RocketHook {
             try "\(contents)\(entry.logString ?? "")\n".write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
         }
         catch let error {
-            Rocket.internalLog(withContext: "DiskHook", message: error.localizedDescription, prefix: "💾")
+            Rocket._log(source: "DiskHook", message: error.localizedDescription, prefix: "💾")
         }
         
     }

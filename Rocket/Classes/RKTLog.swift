@@ -17,7 +17,7 @@ public struct RKTLog {
                 line: Int = #line,
                 rocket: Rocket = Rocket.shared) {
         
-        Rocket.log(rocket: rocket, message: message, prefix: nil, level: level, file: file, function: function, line: line)
+        rocket.log(message: message, prefix: nil, level: level, file: file, function: function, line: line)
         
     }
     
@@ -30,7 +30,7 @@ public struct RKTLog {
                 line: Int = #line,
                 rocket: Rocket = Rocket.shared) {
         
-        Rocket.log(rocket: rocket, message: message, prefix: prefix, level: level, file: file, function: function, line: line)
+        rocket.log(message: message, prefix: prefix, level: level, file: file, function: function, line: line)
         
     }
     

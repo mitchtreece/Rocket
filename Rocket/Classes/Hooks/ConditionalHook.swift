@@ -9,18 +9,18 @@ import Foundation
 
 public class ConditionalHook: RocketHook {
     
-    public typealias Handler = (LogEntry)->()
+    public typealias Handler = (Entry)->()
     
     private var handler: Handler
     
-    public init(condition: @escaping RocketHook.Condition, handler: @escaping Handler) {
+    public init(_ condition: @escaping RocketHook.Condition, handler: @escaping Handler) {
         
         self.handler = handler
         self.conditions = [condition]
         
     }
     
-    public func didAddEntry(_ entry: LogEntry) {
+    public func hook(_ entry: Entry) {
         handler(entry)
     }
     

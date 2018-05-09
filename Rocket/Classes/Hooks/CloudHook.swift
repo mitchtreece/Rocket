@@ -9,38 +9,41 @@ import Foundation
 
 public class CloudHook: RocketHook {
     
-    public typealias Auth = (token: String, headerField: String)
+    public typealias Authorization = (token: String, headerField: String)
     
     var url: URL
-    var auth: Auth?
+    var authorization: Authorization?
+    var additionalParameters: [String: Any]?
     
-    public init(url: URL, auth: Auth? = nil) {
+    public init(url: URL, authorization: Authorization? = nil) {
         
         self.url = url
-        self.auth = auth
+        self.authorization = authorization
         
     }
     
-    public func didAddEntry(_ entry: LogEntry) {
-        Rocket.internalLog(withContext: "CloudHook", message: "Sending \(entry)", prefix: "☁️")
-    }
-    
-    private func serialization(for entry: LogEntry) -> [String: Any] {
+    public func hook(_ entry: Entry) {
         
-        var json: [String: Any] = [
-            "level": entry.level.rawValue,
-            "message": entry.message,
-            "file": (entry.file as NSString).lastPathComponent,
-            "function": entry.function,
-            "line_number": entry.lineNumber,
-            "timestamp": entry.rocket?.timestampFormatter.string(from: entry.timestamp) ?? "???"
+        var payload: [String: Any] = [
+            "entry": entry.dictionary
         ]
         
-        if let prefix = entry.prefix {
-            json["prefix"] = prefix
+        for (key, value) in additionalParameters ?? [:] {
+            payload[key] = value
         }
         
-        return json
+        Rocket._log(source: "CloudHook", message: "Sending \(payload)", prefix: "☁️")
+        
+//        var req = URLRequest(url: url)
+//        req.httpBody = try? JSONSerialization.data(withJSONObject: payload, options: [])
+//
+//        if let auth = authorization {
+//            req.addValue(auth.token, forHTTPHeaderField: auth.headerField)
+//        }
+//
+//        URLSession.shared.dataTask(with: req) { (data, res, err) in
+//            // Do something
+//        }.resume()
         
     }
     

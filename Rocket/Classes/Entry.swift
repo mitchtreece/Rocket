@@ -1,5 +1,5 @@
 //
-//  LogEntry.swift
+//  Entry.swift
 //  Pods-Rocket_Example
 //
 //  Created by Mitch Treece on 10/19/17.
@@ -7,9 +7,7 @@
 
 import Foundation
 
-public struct LogEntry {
-    
-    internal weak var rocket: Rocket?
+public struct Entry {
     
     public internal(set) var level: Rocket.LogLevel
     public internal(set) var prefix: String?
@@ -19,27 +17,35 @@ public struct LogEntry {
     public internal(set) var lineNumber: Int
     public internal(set) var timestamp: Date
     
+    internal weak var rocket: Rocket?
+    
+    public var formattedFunctionName: String {
+        
+        var name = function.replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: "")
+        
+        if !name.contains(" ") {
+            
+            // Probably a Swift function.
+            // Append filename.
+            
+            let _file = (file as NSString).lastPathComponent.replacingOccurrences(of: ".swift", with: "")
+            name = "\(_file).\(name)"
+            
+        }
+        
+        return name
+        
+    }
+    
     internal var logString: String? {
         
         guard let rocket = rocket else { return nil }
         
         let ts = rocket.timestampFormatter.string(from: timestamp)
-        let pre = (prefix != nil) ? prefix! : Rocket.prefix(for: level)
-        let id = Rocket.identifier(for: level)
-        
-        var functionName = function.replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: "")
-        
-        if !functionName.contains(" ") {
-            
-            // Probably a Swift function. Append filename.
-            
-            let fileName = (file as NSString).lastPathComponent.replacingOccurrences(of: ".swift", with: "")
-            functionName = "\(fileName).\(functionName)"
-            
-        }
+        let pre = (prefix != nil) ? prefix! : level.prefix
+        let id = level.identifier
         
         let components = rocket.components
-        
         var string = ""
         
         if components.contains(.prefix) {
@@ -55,7 +61,7 @@ public struct LogEntry {
         }
         
         if components.contains(.function) {
-            string += " \(functionName)"
+            string += " \(formattedFunctionName)"
         }
         
         if components.contains(.lineNumber) {
@@ -81,19 +87,41 @@ public struct LogEntry {
         
         guard let _ = rocket else { return nil }
         
-        let pre = (prefix != nil) ? prefix! : Rocket.prefix(for: level)
-        let id = Rocket.identifier(for: level)
+        let pre = (prefix != nil) ? prefix! : level.prefix
+        let id = level.identifier
         
         return "(\(pre)) [\(id)]: \(message)"
         
     }
     
+    var dictionary: [String: Any] {
+        
+        var dict: [String: Any] = [
+            "level": level.rawValue,
+            "message": message,
+            "file": (file as NSString).lastPathComponent,
+            "function": function,
+            "line_number": lineNumber
+        ]
+        
+        if let ts = rocket?.timestampFormatter.string(from: timestamp) {
+            dict["timestamp"] = ts
+        }
+        
+        if let prefix = prefix {
+            dict["prefix"] = prefix
+        }
+        
+        return dict
+        
+    }
+    
 }
 
-extension LogEntry: CustomStringConvertible, CustomDebugStringConvertible {
+extension Entry: CustomStringConvertible, CustomDebugStringConvertible {
     
     public var description: String {
-        return "LogEntry<\(message)>"
+        return "Entry<\"\(message)\">"
     }
     
     public var debugDescription: String {

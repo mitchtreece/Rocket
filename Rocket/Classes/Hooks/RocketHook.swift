@@ -12,12 +12,12 @@ private struct AssociatedKeys {
 }
 
 public protocol RocketHook: class {
-    func didAddEntry(_ entry: LogEntry)
+    func hook(_ entry: Entry)
 }
 
 extension RocketHook {
     
-    public typealias Condition = (LogEntry)->(Bool)
+    public typealias Condition = (Entry)->(Bool)
     
     internal var conditions: [Condition] {
         get {
