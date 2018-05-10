@@ -9,4 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ObjcViewController : UIViewController
+
+@property (nonatomic, weak) IBOutlet UILabel *label;
+
 @end

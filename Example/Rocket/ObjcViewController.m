@@ -17,10 +17,30 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    self.title = @"Objective-C";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    RKTLog(@"Hello, Objective-C!");
+    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(didTapDoneItem:)];
+    self.navigationItem.rightBarButtonItem = doneItem;
     
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
+    [self.view addGestureRecognizer:recognizer];
+    
+}
+
+- (void)didTapDoneItem:(UIBarButtonItem *)sender {
+    
+    if (self.navigationController) {
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }
+    else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+}
+
+- (void)didTap:(UITapGestureRecognizer *)recognizer {
+    RKTLog(@"Hello, Objective-C!");
 }
 
 @end

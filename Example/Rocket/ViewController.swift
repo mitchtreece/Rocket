@@ -46,8 +46,10 @@ class ViewController: UIViewController {
     
     @IBAction func didTapObjcButton(_ sender: UIButton) {
         
-        let vc = ObjcViewController()
-        present(vc, animated: true, completion: nil)
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "ObjcViewController") {
+            let nav = UINavigationController(rootViewController: vc)
+            present(nav, animated: true, completion: nil)
+        }
         
     }
 
