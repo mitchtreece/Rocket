@@ -11,6 +11,10 @@ import Rocket
 
 class ViewController: UIViewController {
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -22,10 +26,23 @@ class ViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.barStyle = .black
+        self.navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.9921568627, green: 0.5294117647, blue: 0.2078431373, alpha: 1)
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
+        
+    }
+    
     @objc private func didLongPress(_ recognizer: UILongPressGestureRecognizer) {
         
-        let vc = RocketConsoleViewController.instance()
-        present(vc, animated: true, completion: nil)
+        let vc = RKTConsoleViewController.shared
+        self.navigationController?.present(vc, animated: true, completion: nil)
         
     }
     

@@ -1,5 +1,5 @@
 //
-//  RocketConsoleViewController.swift
+//  RKTConsoleViewController.swift
 //  Rocket
 //
 //  Created by Mitch Treece on 10/19/17.
@@ -8,24 +8,37 @@
 import UIKit
 import SnapKit
 
-public class RocketConsoleViewController: UIViewController {
-        
-    private var tableView: UITableView!
+public class RKTConsoleViewController: UINavigationController {
     
-    private(set) var rocket: Rocket
+    public static var shared: RKTConsoleViewController {
+        return RKTConsoleViewController(rocket: Rocket.shared)
+    }
     
-    public static func instance(with rocket: Rocket = Rocket.shared) -> UIViewController {
+    public init(rocket: Rocket) {
         
-        let vc = RocketConsoleViewController(rocket: rocket)
-        let nav = UINavigationController(rootViewController: vc)
-        nav.navigationBar.barStyle = .blackTranslucent
-        nav.navigationBar.barTintColor = UIColor.black
-        nav.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        return nav
+        super.init(nibName: nil, bundle: nil)
+        
+        let vc = _RKTConsoleViewController(rocket: rocket)
+        self.setViewControllers([vc], animated: false)
+        
+        self.navigationBar.barStyle = .blackTranslucent
+        self.navigationBar.barTintColor = UIColor.black
+        self.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
     }
     
-    private init(rocket: Rocket) {
+    public required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+internal class _RKTConsoleViewController: UIViewController {
+        
+    private var tableView: UITableView!
+    private var rocket: Rocket
+    
+    init(rocket: Rocket) {
         
         self.rocket = rocket
         super.init(nibName: nil, bundle: nil)
@@ -73,7 +86,7 @@ public class RocketConsoleViewController: UIViewController {
     
 }
 
-extension RocketConsoleViewController: UITableViewDelegate, UITableViewDataSource {
+extension _RKTConsoleViewController: UITableViewDelegate, UITableViewDataSource {
     
     public func numberOfSections(in tableView: UITableView) -> Int {
         return 1

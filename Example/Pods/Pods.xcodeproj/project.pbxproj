@@ -46,7 +46,7 @@
 		A191D2CA97D3D74CBA2BC1836282F2B0 /* ConstraintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A91D0ACFB6CF1883A820AA2607BCA8 /* ConstraintView.swift */; };
 		A974FE4699BB985E65BF555D8489ED93 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E03888824F0BC09BC4827577C35087 /* Debugging.swift */; };
 		A9D0FA9E5DDD9D8D074909DFA50C7305 /* ConstraintMakerExtendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35E795A4705B4FB474FF417682335F1 /* ConstraintMakerExtendable.swift */; };
-		AE3F7240487236188484BA4CC3127DB0 /* RocketConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FCD55828FD00D02741A591B79A548E /* RocketConsoleViewController.swift */; };
+		AE3F7240487236188484BA4CC3127DB0 /* RKTConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FCD55828FD00D02741A591B79A548E /* RKTConsoleViewController.swift */; };
 		BB81127D7A58A2B05634C6F438FF48A0 /* ConstraintPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3A931CDC4FB0563592274ED61655C7 /* ConstraintPriority.swift */; };
 		BEE664C7B5800522549159BC91E5F8A2 /* ConstraintDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A39EF6D4C8D8F847461613349A75E07 /* ConstraintDescription.swift */; };
 		C31C8B6A25BF096C9B939798C877B736 /* ConstraintLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5FAAF2F13CE5B667DCA58EF782CF6D /* ConstraintLayoutGuide.swift */; };
@@ -146,7 +146,7 @@
 		9706B6D570872C8482D352CD76CB3805 /* Pods-Rocket_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Rocket_Example.release.xcconfig"; sourceTree = "<group>"; };
 		97A92178E670F2B19332D92079371258 /* Pods-Rocket_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Rocket_Example.modulemap"; sourceTree = "<group>"; };
 		A704FFCA00CD30C39E17E3BC3E4F5F69 /* Pods-Rocket_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Rocket_Tests-resources.sh"; sourceTree = "<group>"; };
-		A8FCD55828FD00D02741A591B79A548E /* RocketConsoleViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RocketConsoleViewController.swift; sourceTree = "<group>"; };
+		A8FCD55828FD00D02741A591B79A548E /* RKTConsoleViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RKTConsoleViewController.swift; sourceTree = "<group>"; };
 		AF5FAAF2F13CE5B667DCA58EF782CF6D /* ConstraintLayoutGuide.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuide.swift; path = Source/ConstraintLayoutGuide.swift; sourceTree = "<group>"; };
 		B058F739089B32F3323418933731ADFB /* ConstraintViewDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintViewDSL.swift; path = Source/ConstraintViewDSL.swift; sourceTree = "<group>"; };
 		B54347160C1E2D6152E0A49C97D43D4B /* Pods-Rocket_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Rocket_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -254,8 +254,8 @@
 		1C1AA0372AD7D0CA004DA0868EE5ACA5 /* Console */ = {
 			isa = PBXGroup;
 			children = (
+				A8FCD55828FD00D02741A591B79A548E /* RKTConsoleViewController.swift */,
 				B98FAA51B4A88FE4311D74100038356E /* ConsoleEntryCell.swift */,
-				A8FCD55828FD00D02741A591B79A548E /* RocketConsoleViewController.swift */,
 			);
 			path = Console;
 			sourceTree = "<group>";
@@ -608,7 +608,7 @@
 				2634053520A24843001CB446 /* RKTLog.swift in Sources */,
 				0C8AF5E7B1931B8ECA7A1CC6B04ACF51 /* Rocket-dummy.m in Sources */,
 				1F85B70D8D734C09D7FF7D4724CD77E0 /* Rocket.swift in Sources */,
-				AE3F7240487236188484BA4CC3127DB0 /* RocketConsoleViewController.swift in Sources */,
+				AE3F7240487236188484BA4CC3127DB0 /* RKTConsoleViewController.swift in Sources */,
 				2634053920A25A6C001CB446 /* ConditionalHook.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

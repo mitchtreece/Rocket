@@ -1,12 +1,13 @@
 ![Rocket](Resources/logo.png)
 
-[![CI Status](http://img.shields.io/travis/mitchtreece/Rocket.svg?style=flat)](https://travis-ci.org/mitchtreece/Rocket)
-[![Version](https://img.shields.io/cocoapods/v/Rocket.svg?style=flat)](http://cocoapods.org/pods/Rocket)
-[![License](https://img.shields.io/cocoapods/l/Rocket.svg?style=flat)](http://cocoapods.org/pods/Rocket)
-[![Platform](https://img.shields.io/cocoapods/p/Rocket.svg?style=flat)](http://cocoapods.org/pods/Rocket)
+[![Version](https://img.shields.io/cocoapods/v/Rocket.svg?style=for-the-badge)](http://cocoapods.org/pods/Rocket)
+![Swift](https://img.shields.io/badge/Swift-4.2-orange.svg?style=for-the-badge)
+[![Platform](https://img.shields.io/cocoapods/p/Rocket.svg?style=for-the-badge)](http://cocoapods.org/pods/Rocket)
+![iOS](https://img.shields.io/badge/iOS-10,%2011-blue.svg?style=for-the-badge)
+[![License](https://img.shields.io/cocoapods/l/Rocket.svg?style=for-the-badge)](http://cocoapods.org/pods/Rocket)
 
 ## Overview
-Lightweight Swift logging library. Powered by rocket fuel 🔥🚀.
+Tiny Swift logging library. Powered by rocket fuel 🔥🚀.
 
 ## Installation
 ### CocoaPods
