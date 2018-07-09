@@ -7,12 +7,24 @@
 
 import Foundation
 
+/**
+ A hook that executes a handler based on a condition.
+ */
 public class ConditionalHook: RocketHook {
     
-    public typealias Handler = (Entry)->()
+    /**
+     The hook's handler block.
+     */
+    public typealias Handler = (Event)->()
     
     private var handler: Handler
     
+    /**
+     Initializes a new `ConditionalHook` with a condition & handler.
+     
+     - Parameter condition: The hook's condition.
+     - Parameter handler: The hook's handler.
+     */
     public init(_ condition: @escaping RocketHook.Condition, handler: @escaping Handler) {
         
         self.handler = handler
@@ -20,8 +32,8 @@ public class ConditionalHook: RocketHook {
         
     }
     
-    public func hook(_ entry: Entry) {
-        handler(entry)
+    public func hook(_ event: Event) {
+        handler(event)
     }
     
 }

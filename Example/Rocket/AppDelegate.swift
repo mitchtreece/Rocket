@@ -16,17 +16,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let alert = ConditionalHook({ $0.level == Rocket.LogLevel.error }, handler: { [weak self] (entry) in
+        let alert = ConditionalHook({ (event) in
+            
+            guard let event = event as? LogEvent else { return false }
+            return event.level == Rocket.LogLevel.error
+            
+        }, handler: { (event) in
+            
+            guard let event = event as? LogEvent else { return }
             
             let message = """
-            \(entry.formattedFunctionName)()
-            \(entry.message)
+            \(event.source.formattedFunctionName)
+            \(event.message)
             """
             
             let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
             
-            let vc = self?.window?.rootViewController
+            let vc = UIApplication.topViewController()
             vc?.present(alert, animated: true, completion: nil)
             
         })

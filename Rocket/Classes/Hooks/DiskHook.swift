@@ -7,6 +7,11 @@
 
 import Foundation
 
+/**
+ A hook that logs events to disk.
+ 
+ Logs are stored in: _documents/\<date\>.rkt_
+ */
 public class DiskHook: RocketHook {
         
     private var dateFormatter: DateFormatter!
@@ -24,6 +29,9 @@ public class DiskHook: RocketHook {
         
     }
     
+    /**
+     Initializes a new `DiskHook` instance.
+     */
     public init() {
         
         dateFormatter = DateFormatter()
@@ -31,10 +39,12 @@ public class DiskHook: RocketHook {
         
     }
     
-    public func hook(_ entry: Entry) {
+    public func hook(_ event: Event) {
+        
+        guard let logEvent = event as? LogEvent else { return }
         
         guard let path = filePath else {
-            Rocket._log(source: "DiskHook", message: "Error generating log path", prefix: "💾")
+            Rocket._log(context: "DiskHook", message: "Error generating log path", prefix: "💾")
             return
         }
         
@@ -45,10 +55,10 @@ public class DiskHook: RocketHook {
         }
         
         do {
-            try "\(contents)\(entry.logString ?? "")\n".write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
+            try "\(contents)\(logEvent.logString ?? "")\n".write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
         }
         catch let error {
-            Rocket._log(source: "DiskHook", message: error.localizedDescription, prefix: "💾")
+            Rocket._log(context: "DiskHook", message: error.localizedDescription, prefix: "💾")
         }
         
     }

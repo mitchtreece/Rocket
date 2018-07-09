@@ -49,9 +49,3 @@
                                                        line:__LINE__]
 
 #define RKTLog(message) RKTDebug(message)
-#define RKTCustomLog(rocket, prefix, message, level) [[Rocket shared] logWithMessage:message \
-                                                                              prefix:prefix \
-                                                                               level:level \
-                                                                                file:[NSString stringWithFormat:@"%s", __FILE__] \
-                                                                            function:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__] \
-                                                                                line:__LINE__]

@@ -29,7 +29,7 @@
     
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
     [self.view addGestureRecognizer:recognizer];
-    
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -57,7 +57,7 @@
 }
 
 - (void)didTap:(UITapGestureRecognizer *)recognizer {
-    RKTLog(@"Hello, Objective-C!");
+    RKTError(@"This is an Objective-C error");
 }
 
 @end

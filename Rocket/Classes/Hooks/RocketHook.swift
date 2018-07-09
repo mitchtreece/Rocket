@@ -11,13 +11,26 @@ private struct AssociatedKeys {
     static var ConditionsKey = "RocketHook.conditions"
 }
 
+/**
+ A `RocketHook` adds additional functionality to events that meet a certain set of conditions.
+ */
 public protocol RocketHook: class {
-    func hook(_ entry: Entry)
+    
+    /**
+     The hook's execution function.
+     
+     - Parameter event: The event that triggered the hook.
+     */
+    func hook(_ event: Event)
+    
 }
 
 extension RocketHook {
     
-    public typealias Condition = (Entry)->(Bool)
+    /**
+     A condition block. Given an event, a return flag is expected indicating whether the hook should be executed.
+     */
+    public typealias Condition = (Event)->(Bool)
     
     internal var conditions: [Condition] {
         get {
@@ -28,6 +41,11 @@ extension RocketHook {
         }
     }
     
+    /**
+     Adds a condition to the hook's condition set.
+     
+     - Parameter block: The condition block.
+     */
     public func condition(_ block: @escaping Condition) {
         
         var _conditions = self.conditions

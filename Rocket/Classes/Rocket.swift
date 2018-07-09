@@ -8,16 +8,33 @@
 
 import Foundation
 
+/**
+ `Rocket` is a lightweight logging and event frfamework with built-in level & conditional systems.
+ */
 @objcMembers
-@objc public class Rocket: NSObject {
+public class Rocket: NSObject {
     
+    /**
+     Representation of the various log levels.
+     */
     @objc public enum LogLevel: Int, Comparable {
         
+        /// A verbose log level; _value = 5_.
         case verbose = 5
+        
+        /// A debug log level; _value = 4_.
         case debug = 4
+        
+        /// An error log level; _value = 3_.
         case error = 3
+        
+        /// A warning log level; _value = 2_.
         case warning = 2
+        
+        /// An info log level; _value = 1_.
         case info = 1
+        
+        /// A log level representing the absence of a log level, spooky!; _value = 0_.
         case none = 0
         
         public static func < (lhs: LogLevel, rhs: LogLevel) -> Bool {
@@ -56,143 +73,79 @@ import Foundation
         
     }
     
+    /**
+     Representation of the various log components.
+     */
     public enum Components: Int {
         
+        /// A prefix component.
         case prefix = 1
+        
+        /// A log level component.
         case level = 2
+        
+        /// A timestamp component.
         case timestamp = 3
+        
+        /// A function name component.
         case function = 4
+        
+        /// A line number component.
         case lineNumber = 5
         
     }
     
-    /// The shared `Rocket` instance.
+    /**
+     The shared `Rocket` instance.
+     */
     public static let shared = Rocket()
     
     /**
-     Specifies the **maximum** log level.
-     Any logs _equal to_ or _less than_ this level will be printed.
+     The **maximum** log level.
+     
+     Any logs _equal to_ or _less than_ this level will be printed. _defaults to verbose_.
      */
     public var level: LogLevel = .verbose
     
     /**
      Specifies the level to lock the logger to.
+     
      If this is set, only logs **equal** to this level will be printed.
-     - Note: If this is set, the `level` property will be ignored.
+     
+     **Note**: If this is set, the `level` property will be ignored.
      */
     public var lockedLevel: LogLevel?
     
-    /// Specifies the components to be included when logging.
+    /**
+     The components to include when logging.
+     */
     public var components: [Components] = [.prefix, .level, .function, .lineNumber]
     
-    /// The date formatter to use when logging.
+    /**
+     The date formatter to use when logging.
+     */
     public var timestampFormatter = DateFormatter()
     
-    /// The hooks to be called when logging.
+    /**
+     The hooks to use when logging.
+     */
     public var hooks = [RocketHook]()
         
-    internal var entries = [Entry]()
+    internal var logEvents = [LogEvent]()
     
     private override init() {
         timestampFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
     }
     
     /**
-     Initializes a new `Rocket` instance with a given `LogLevel`.
-     - Parameter level: The log level.
+     Initializes a new `Rocket` instance with a given log level.
+     
+     - Parameter level: The log level; _defaults to verbose_.
      */
     public convenience init(level: LogLevel = .verbose) {
         
         self.init()
         self.level = level
-        
-    }
-    
-    // MARK: Logging
-    
-    /**
-     Logs an event.
-     - Parameter message: The log message.
-     - Parameter prefix: An optional log prefix.
-     - Parameter level: The event's log level.
-     - Parameter file: The source filename.
-     - Parameter function: The source function name.
-     - Parameter line: The source line number.
-     */
-    public func log(message: String, prefix: String? = nil, level: LogLevel = .debug, file: String, function: String, line: Int) {
-        
-        func addAndPrintEntry(_ entry: Entry) {
-            
-            entries.append(entry)
-            print(entry.logString ?? Rocket._log(message: "Unable to generate log string"))
-            
-        }
-        
-        let entry = Entry(level: level,
-                          prefix: prefix,
-                          message: message,
-                          file: file,
-                          function: function,
-                          lineNumber: line,
-                          timestamp: Date(),
-                          rocket: self)
-        
-        if level == .none {
-            
-            // Always execute hooks (regardless of what the entry's level is)
-            // We should let the hook decide what to do with it
-            
-            executeHooks(for: entry)
-            return
-            
-        }
-        
-        if let locked = lockedLevel, level == locked {
-            addAndPrintEntry(entry)
-        }
-        else if level <= self.level {
-            addAndPrintEntry(entry)
-        }
-
-        executeHooks(for: entry)
-        
-    }
-    
-    /**
-     Logs an internal (Rocket) event to the console.
-     - Parameter source: An optional source string.
-     - Parameter message: The log message.
-     - Parameter prefix: An optional log prefix.
-     */
-    public static func _log(source: String? = nil, message: String, prefix: String? = nil) {
-        
-        let pre = prefix ?? "🚀"
-        var _context = "[Rocket"
-        
-        if let source = source {
-            _context += "(\(source))"
-        }
-        
-        _context += "]"
-        
-        print("(\(pre)) \(_context): \(message)")
-        
-    }
-    
-    // MARK: Hooks
-    
-    private func executeHooks(for entry: Entry) {
-        
-        hooks.forEach { (hook) in
-            
-            func check(_ conditions: [RocketHook.Condition]) -> Bool {
-                return (conditions.first(where: { !$0(entry) }) == nil)
-            }
-            
-            guard check(hook.conditions) else { return }
-            hook.hook(entry)
-            
-        }
         
     }
     

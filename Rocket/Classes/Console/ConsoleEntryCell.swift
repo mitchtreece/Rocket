@@ -1,5 +1,5 @@
 //
-//  ConsoleEntryCell.swift
+//  ConsoleEventCell.swift
 //  Rocket
 //
 //  Created by Mitch Treece on 10/19/17.
@@ -7,23 +7,23 @@
 
 import UIKit
 
-class ConsoleEntryCell: UITableViewCell {
+internal class ConsoleEventCell: UITableViewCell {
     
-    static let identifier = "ConsoleEntryCell"
+    internal static let identifier = "ConsoleEventCell"
     private static let font = UIFont.systemFont(ofSize: 12, weight: .semibold)
     
     private var label: UILabel!
     
-    var entry: Entry? {
+    internal var event: LogEvent? {
         didSet {
-            guard let entry = entry else { return }
-            layout(for: entry)
+            guard let event = event else { return }
+            layout(for: event)
         }
     }
     
-    static func height(for entry: Entry) -> CGFloat {
+    internal static func height(for event: LogEvent) -> CGFloat {
         
-        guard let string = entry.consoleString else { return 0 }
+        guard let string = event.consoleString else { return 0 }
         
         let size = CGSize(width: UIScreen.main.bounds.width - 16, height: CGFloat.greatestFiniteMagnitude)
         let textHeight = (string as NSString).boundingRect(with: size,
@@ -56,7 +56,7 @@ class ConsoleEntryCell: UITableViewCell {
         label = UILabel()
         label.backgroundColor = UIColor.clear
         label.textColor = UIColor.white
-        label.font = ConsoleEntryCell.font
+        label.font = ConsoleEventCell.font
         label.numberOfLines = 0
         contentView.addSubview(label)
         label.snp.makeConstraints { (make) in
@@ -67,10 +67,8 @@ class ConsoleEntryCell: UITableViewCell {
         
     }
     
-    private func layout(for entry: Entry) {
-        
-        label.text = entry.consoleString
-        
+    private func layout(for event: LogEvent) {
+        label.text = event.consoleString
     }
     
 }

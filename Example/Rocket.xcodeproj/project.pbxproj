@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		262CA31C1F45015100FC9B31 /* ObjcViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 262CA31B1F45015100FC9B31 /* ObjcViewController.m */; };
+		264BB25020ACE688009459B0 /* UIApplication+TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264BB24F20ACE687009459B0 /* UIApplication+TopViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		262CA3191F45015100FC9B31 /* Rocket_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rocket_Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		262CA31A1F45015100FC9B31 /* ObjcViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcViewController.h; sourceTree = "<group>"; };
 		262CA31B1F45015100FC9B31 /* ObjcViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjcViewController.m; sourceTree = "<group>"; };
+		264BB24F20ACE687009459B0 /* UIApplication+TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+TopViewController.swift"; sourceTree = "<group>"; };
 		4BDE1D34220D3CCA69C19B24 /* Pods_Rocket_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D7E4212C621FDA5E4FC204E /* Rocket.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Rocket.podspec; path = ../Rocket.podspec; sourceTree = "<group>"; };
 		600896A8E205AE7A845C42F5 /* Pods-Rocket_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket_Tests/Pods-Rocket_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				262CA31A1F45015100FC9B31 /* ObjcViewController.h */,
 				262CA31B1F45015100FC9B31 /* ObjcViewController.m */,
+				264BB24F20ACE687009459B0 /* UIApplication+TopViewController.swift */,
 				26E73D0720378BCB00182129 /* Resources */,
 			);
 			name = "Example for Rocket";
@@ -381,6 +384,7 @@
 				262CA31C1F45015100FC9B31 /* ObjcViewController.m in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				264BB25020ACE688009459B0 /* UIApplication+TopViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

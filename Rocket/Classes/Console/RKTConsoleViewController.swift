@@ -8,12 +8,21 @@
 import UIKit
 import SnapKit
 
+/**
+ A debug console view controller used to view `Rocket` logs.
+ */
 public class RKTConsoleViewController: UINavigationController {
     
+    /**
+     The console view controller for the shared `Rocket` instance.
+     */
     public static var shared: RKTConsoleViewController {
         return RKTConsoleViewController(rocket: Rocket.shared)
     }
     
+    /**
+     Initializes a new console view controller for a `Rocket` instance.
+     */
     public init(rocket: Rocket) {
         
         super.init(nibName: nil, bundle: nil)
@@ -69,7 +78,7 @@ internal class _RKTConsoleViewController: UIViewController {
             make.edges.equalTo(0)
         }
         
-        tableView.register(ConsoleEntryCell.self, forCellReuseIdentifier: ConsoleEntryCell.identifier)
+        tableView.register(ConsoleEventCell.self, forCellReuseIdentifier: ConsoleEventCell.identifier)
         
     }
     
@@ -93,20 +102,20 @@ extension _RKTConsoleViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rocket.entries.count
+        return rocket.logEvents.count
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let entry = rocket.entries[indexPath.row]
-        return ConsoleEntryCell.height(for: entry)
+        let entry = rocket.logEvents[indexPath.row]
+        return ConsoleEventCell.height(for: entry)
         
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: ConsoleEntryCell.identifier) as? ConsoleEntryCell
-        cell?.entry = rocket.entries[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: ConsoleEventCell.identifier) as? ConsoleEventCell
+        cell?.event = rocket.logEvents[indexPath.row]
         return cell ?? UITableViewCell()
         
     }
