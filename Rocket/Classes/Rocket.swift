@@ -9,7 +9,7 @@
 import Foundation
 
 /**
- `Rocket` is a lightweight logging and event frfamework with built-in level & conditional systems.
+ `Rocket` is a lightweight logging and event framework with built-in level & conditional systems.
  */
 @objcMembers
 public class Rocket: NSObject {

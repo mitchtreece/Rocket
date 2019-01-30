@@ -16,12 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let alert = ConditionalHook({ (event) in
+        let alert = ConditionalHook({ event in
             
             guard let event = event as? LogEvent else { return false }
             return event.level == Rocket.LogLevel.error
             
-        }, handler: { (event) in
+        }, handler: { event in
             
             guard let event = event as? LogEvent else { return }
             

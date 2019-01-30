@@ -18,4 +18,6 @@ Pod::Spec.new do |s|
   s.ios.public_header_files = 'Rocket/Classes/**/*.h'
   s.source_files = 'Rocket/Classes/**/*'
 
+  s.dependency 'SnapKit', '~> 4.0.0'
+
 end
